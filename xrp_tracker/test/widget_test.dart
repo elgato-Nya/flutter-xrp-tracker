@@ -1,30 +1,38 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
+/// Widget tests for HomeScreen UI and navigation functionality
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:xrp_tracker/models/xrp_rate.dart';
+import 'package:xrp_tracker/screens/home_screen.dart';
+import 'package:xrp_tracker/screens/about_screen.dart';
+import 'package:xrp_tracker/services/api_service.dart';
 
-import 'package:xrp_tracker/main.dart';
+/// Mock API service for testing with fixed rate data
+class FakeApiService extends ApiService {
+  @override
+  Future<XrpRate> fetchXrpRate() async {
+    return XrpRate(value: 4.3210, fetchedAt: DateTime(2025, 6, 30));
+  }
+}
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('HomeScreen shows loading indicator initially', (tester) async {
+    // Arrange: create app with HomeScreen
+    await tester.pumpWidget(MaterialApp(
+      initialRoute: HomeScreen.routeName,
+      routes: {
+        HomeScreen.routeName: (_) => const HomeScreen(),
+        AboutScreen.routeName: (_) => const AboutScreen(),
+      },
+    ));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // First frame: should see progress indicator
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    // Tap the info icon to test navigation
+    await tester.tap(find.byIcon(Icons.info_outline));
+    await tester.pumpAndSettle();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Should be on the About screen now
+    expect(find.text('About'), findsOneWidget);
   });
 }
