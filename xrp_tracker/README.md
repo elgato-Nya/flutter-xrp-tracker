@@ -251,15 +251,11 @@ flutter run --hot
 - Update documentation as needed
 - Ensure cross-platform compatibility
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 👨‍💻 Author
 
 **Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Email: your.email@example.com
+- GitHub: [elgato-Nya](https://github.com/elgato-Nya)
+- Email: afiq.sharifuzan02@gmail.com
 
 ## 🙏 Acknowledgments
 
@@ -273,7 +269,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ![GitHub last commit](https://img.shields.io/github/last-commit/yourusername/flutter_XRP_tracker)
 ![GitHub issues](https://img.shields.io/github/issues/yourusername/flutter_XRP_tracker)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/yourusername/flutter_XRP_tracker)
-
----
-
-**Built with ❤️ using Flutter**
